@@ -1,7 +1,7 @@
 # [Logs Monitor]()
 
-It is an application to monitor the behavior of the players in a fun game called Noisrucer,
-which helps students in learning difficult and abstract algorithm concepts.
+It is an application to monitor the behavior of the players in a fun academic game called Noisrucer,
+which helps students learn difficult and abstract algorithm concepts.
 
 ![Login](https://github.com/DiptiPrabhavale11/React-Game-Monitor/assets/113642858/f8eaf477-a485-459a-a886-b631281f9e89)
 
