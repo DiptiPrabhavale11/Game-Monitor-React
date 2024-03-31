@@ -8,6 +8,7 @@ which helps students in learning difficult and abstract algorithm concepts.
 
 ![Log details](https://github.com/DiptiPrabhavale11/Game-Monitor-React/assets/113642858/dc190114-1e2e-49fb-94e7-cd5d23c97297)
 
+![Dashboard](https://github.com/DiptiPrabhavale11/Game-Monitor-React/assets/113642858/4e22a0d6-9c31-4f0e-a64a-857a4a636a6f)
 
 ## How to run this Project?
 
