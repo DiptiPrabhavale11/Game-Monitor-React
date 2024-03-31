@@ -5,11 +5,14 @@
   "main": "index.js",
   "scripts": {
     "test": "cross-env NODE_ENV=test jest --verbose true --runInBand",
-    "start": "cross-env NODE_ENV=production node index.js",
+    "start": "cross-env NODE_ENV=prod node index.js",
     "debugger": "node inspect index.js",
     "dev": "cross-env NODE_ENV=dev nodemon index.js",
     "lint": "eslint .",
-    "lint:fix": "npm run lint -- --fix"
+    "lint:fix": "npm run lint -- --fix",
+    "insert_data": "node db.js",
+    "build:ui": "rm -rf build && cd ./frontend && npm run build && cp -r dist ../build",
+    "deploy": "npm run build:ui && git add . && git commit -m npm_generated_rebuild_of_the_UI && git push"
   },
   "jest": {
     "bail": true,

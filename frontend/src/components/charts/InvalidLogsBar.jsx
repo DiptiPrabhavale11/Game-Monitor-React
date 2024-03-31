@@ -1,22 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Chart from 'chart.js/auto';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Row } from 'react-bootstrap';
 import Filter from '../../utility/filters';
 import Services from '../../Services/api';
+import ChartConstant from '../../Services/constants/chartConstants';
+import { useNavigate } from "react-router-dom";
+import {INVALID_LOGS} from "../../utility/UrlEndpoints.js";
 const InvalidPostRequestsMetric = () => {
     const [errorLogsData, setErrorLogsData] = useState([]);
     const [chartData, setChartData] = useState([]);
+    let navigate = useNavigate();
     useEffect(() => {
-        const loggedUserJSON = window.localStorage.getItem('loggedUser')
-        if (loggedUserJSON) {
-            const user = JSON.parse(loggedUserJSON)
-            Services.setToken(user.token)
-        }
-        Services.getAll('/api/logs/errors/').then(data => {
-            console.log(data)
-            const lastDay = Filter.lastNDaysData(data, 'startTime', 1);
-            const lastSevenDays = Filter.lastNDaysData(data, 'startTime', 7);
-            const lastMonth = Filter.lastNDaysData(data, 'startTime', 30);
+        Services.getAll(INVALID_LOGS).then(data => {
+            const lastDay = Filter.lastNDaysData(data, ChartConstant.START_TIME, ChartConstant.LAST_DAY);
+            const lastSevenDays = Filter.lastNDaysData(data, ChartConstant.START_TIME, ChartConstant.LAST_WEEK);
+            const lastMonth = Filter.lastNDaysData(data, ChartConstant.START_TIME, ChartConstant.LAST_MONTH);
             const chartArr = [lastDay.length, lastSevenDays.length, lastMonth.length];
             setChartData(chartArr);
             setErrorLogsData(data);
@@ -34,20 +32,28 @@ const InvalidPostRequestsMetric = () => {
         new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ['Last 24 hours', 'Last 7 Days', 'Last month'],
+                labels: [ChartConstant.LAST_24_HOURS, ChartConstant.LAST_7_DAYS, ChartConstant.LAST_30_DAYS],
                 datasets: [{
-                    label: 'Invalid Logs',
+                    label: ChartConstant.CHART_TITLE,
                     data: chartData,
-                    backgroundColor: ['rgba(255, 99, 132, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(255, 205, 86, 0.2)',],
-                    borderColor: ['rgba(255, 99, 132, 1)', 'rgb(75, 192, 192)',
-                        'rgb(255, 205, 86)'],
+                    backgroundColor: [
+                        ChartConstant.LIGHT_ORANGE,
+                        ChartConstant.LIGHT_PINK,
+                        ChartConstant.SEA_BLUE,
+                    ],
+                    borderColor: [
+                        ChartConstant.DARK_ORANGE,
+                        ChartConstant.DARK_PINK,
+                        ChartConstant.DARK_SEA_BLUE,
+                    ],
                     borderWidth: 1,
                     maxBarThickness: 50
                 }]
             },
             options: {
+                onClick: (e) =>{
+                    navigate('/logs');
+                },
                 scales: {
                     x: {
                         beginAtZero: true,

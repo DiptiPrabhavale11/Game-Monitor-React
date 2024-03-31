@@ -3,16 +3,12 @@ import Services from '../Services/api';
 import { Col, Row } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import GameSession from './GameSession';
+import {LOGS} from "../utility/UrlEndpoints.js";
 
 const Logs = () => {
     const [gameSessions, setGameSessions] = useState([]);
     useEffect(() => {
-            const loggedUserJSON = window.localStorage.getItem('loggedUser')
-            if (loggedUserJSON) {
-                const user = JSON.parse(loggedUserJSON)
-                Services.setToken(user.token)
-            }
-        Services.getAll('/api/logs')
+        Services.getAll(LOGS)
             .then(response => { setGameSessions(response) })
     }, []);
 

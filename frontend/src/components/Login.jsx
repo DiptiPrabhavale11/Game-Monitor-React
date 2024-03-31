@@ -1,12 +1,22 @@
 import { useState } from "react";
 import loginService from "../Services/login"
-import { Button, Container, Row, Col } from "react-bootstrap";
-import Form from 'react-bootstrap/Form';
-
+import {Button, Container, Row, Col} from "react-bootstrap";
+import Form from "react-bootstrap/Form";
+import {TOKEN_AUTH_KEY} from "../utility/Constants.js";
+import { useNavigate } from "react-router-dom";
 const Login = ({ setError, setUser }) => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-
+    let navigate = useNavigate();
+    const loggedIn = (user) => {
+        window.localStorage.setItem(
+            TOKEN_AUTH_KEY, user.token
+        )
+        setUser(user);
+        setUsername('');
+        setPassword('');
+        navigate("/logs");
+    }
     const handleLogin = async (event) => {
         event.preventDefault()
         try {
@@ -14,12 +24,7 @@ const Login = ({ setError, setUser }) => {
                 username, password
             })
             if (user.canAccess) {
-                window.localStorage.setItem(
-                    'loggedUser', JSON.stringify(user)
-                )
-                setUser(user)
-                setUsername('')
-                setPassword('')
+                loggedIn(user);
             } else
                 setErrorMsg({ msg: "Request admin for access", variant: 'danger' })
 
@@ -35,8 +40,8 @@ const Login = ({ setError, setUser }) => {
     }
 
     return (
-        <Container fluid className="login-form-container" style={{ marginTop: '3%' }} >
-            <h2 style={{ textAlign: "center", fontWeight: '700', color: 'rgb(84, 92, 129)' }}>Login</h2>
+        <Container fluid className="login-form-container" style={{ marginTop: '10%' }} >
+            <h2 className="loginLabel">Login</h2>
             <Form onSubmit={handleLogin} className="my-2">
                 <Form.Group controlId="formBasicEmail" className="my-2">
                     <Form.Label>Username</Form.Label>
@@ -45,7 +50,7 @@ const Login = ({ setError, setUser }) => {
                         placeholder="Enter username"
                         value={username}
                         name="Username"
-                        onChange={({ target }) => setUsername(target.value)}
+                        onChange={(e) => setUsername(e.target.value)}
                     /></Form.Group>
                 <Form.Group controlId="formBasicPassword" className="my-2">
                     <Form.Label>Password</Form.Label>
@@ -64,7 +69,7 @@ const Login = ({ setError, setUser }) => {
                                 color: 'rgb(255, 255, 255)'
                             }}
                             variant="rgb(84, 92, 129)"
-                            type="submit" className="my-3 submit-button">
+                            type="submit" className="my-3">
                             Sign in
                         </Button>
                     </Col>

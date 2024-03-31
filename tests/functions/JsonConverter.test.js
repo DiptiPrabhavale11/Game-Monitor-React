@@ -24,7 +24,6 @@ describe("Testing for data transformations from raw game log", () => {
     test("Converted level name should be recorded in the first level session object", () => {
         const outputJson = convertJson(level);
         expect(outputJson.levelSessions).toBeDefined();
-        // There should be single level session with level name.
         const firstLevelSession = getLevelSessionByIndex(outputJson, 0);
         expect(firstLevelSession.levelName).toBe("my_level.json");
 

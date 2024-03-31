@@ -1,8 +1,8 @@
 import axios from 'axios'
-const baseUrl = 'http://localhost:3001/api/login'
+import {LOGIN} from "../utility/UrlEndpoints.js";
 
 const login = (credentials) => {
-    const request = axios.post(baseUrl,credentials)
+    const request = axios.post(LOGIN,credentials)
     return request.then(response => response.data)
 }
 

@@ -22,8 +22,7 @@ const IsValidDate = (date) => {
 const IsValidateLevel = (levelsArr) => {
     const errorArr = levelsArr.filter(level => {
         return (!level.levelName || level.levelName === "" ||
-            !level.userInteractions ||
-            level.userInteractions.length === 0
+            !level.userInteractions
         );
     });
     return errorArr.length === 0;

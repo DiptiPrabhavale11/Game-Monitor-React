@@ -1,18 +1,13 @@
 import axios from 'axios'
-// const baseUrl = '/api/logs'
-const baseUrl = 'http://localhost:3001'
-let token = null
+import {TOKEN_AUTH_KEY} from "../utility/Constants.js";
 
-const setToken = newToken => {
-    token = `Bearer ${newToken}`
-}
 const getAll = (url) => {
+    const token= localStorage.getItem(TOKEN_AUTH_KEY)
     const config = {
-        headers: { Authorization: token },
+        headers: { Authorization: `Bearer ${token}` }
     }
-    const requestURL = baseUrl + url;
-    const request = axios.get(requestURL,config)
+    const request = axios.get(url,config)
     return request.then(response => response.data)
 }
 
-export default { getAll, setToken }
+export default { getAll }
