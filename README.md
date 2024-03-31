@@ -2,6 +2,12 @@
 
 It is an application to monitor the behavior of the players in a fun game called Noisrucer,
 which helps students in learning difficult and abstract algorithm concepts.
+![Login Page](https://github.com/DiptiPrabhavale11/Game-Monitor-React/assets/113642858/f13571b9-fe90-4048-9ba5-9a41c3392691)
+
+![Logs Page](https://github.com/DiptiPrabhavale11/Game-Monitor-React/assets/113642858/03a5a948-e0b4-44c3-858e-a613c692a7fb)
+
+![Log details](https://github.com/DiptiPrabhavale11/Game-Monitor-React/assets/113642858/dc190114-1e2e-49fb-94e7-cd5d23c97297)
+
 
 ## How to run this Project?
 
@@ -46,12 +52,3 @@ Please find the details on how to set up this project locally [here](Documentati
     - The popular level
     - The difficult level
     -  Time taken by the user to complete a particular level
-- [ ] Filter logs based on different parameters
-    - Start Time
-    - End Time
-    - Level Name
-    - Game id
-    - Simple text
-- [ ]  User Authentication
-- [ ]  Store error logs in DB and provide analytical insights on the dashboard
-- [ ]  Deploy application on render
