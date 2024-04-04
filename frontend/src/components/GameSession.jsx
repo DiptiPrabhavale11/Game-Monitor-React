@@ -3,7 +3,7 @@ import { Col, Row } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import LevelSession from "./LevelSession";
 
-const GameSession = ({ game, gameClick }) => {
+const GameSession = ({ game, gameClick ,isValid}) => {
     const gameSessionClick = (game) => {
         gameClick(game);
     }
@@ -37,9 +37,9 @@ const GameSession = ({ game, gameClick }) => {
             }}>
             <Col md="4">Game session Id: <b>{game.gameSessionId} </b></Col>
             <Col md="2">Levels Attempted: <b>{levelsAttempted(game)}</b></Col>
-            <Col md="4">Total
+            {isValid && <Col md="4">Total
                 Duration: <b>{totalDuration(game)}</b> {totalDuration(game) > 1 ? 'minutes' : 'minute'}
-            </Col>        </Row>
+            </Col> }       </Row>
         <Row style={{ marginBottom: '10px' }} className="json mx-1">{game.selected && displayDetails(game)}</Row>
     </Container>)
 }

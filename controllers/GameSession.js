@@ -44,9 +44,9 @@ const saveGame = async (request, response) => {
         }).catch(err => {
             console.error(err);
             return response.status(500).send("Error storing logs!");
-        })
+        });
     }
-}
+};
 
 
 gameSessionRouter.post("/", async (request, response) => {

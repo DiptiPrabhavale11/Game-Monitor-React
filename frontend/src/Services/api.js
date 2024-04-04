@@ -1,12 +1,7 @@
-import axios from 'axios'
-import {TOKEN_AUTH_KEY} from "../utility/Constants.js";
+import Axios from "../utility/interceptor";
 
 const getAll = (url) => {
-    const token= localStorage.getItem(TOKEN_AUTH_KEY)
-    const config = {
-        headers: { Authorization: `Bearer ${token}` }
-    }
-    const request = axios.get(url,config)
+    const request = Axios.get(url)
     return request.then(response => response.data)
 }
 

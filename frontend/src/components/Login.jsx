@@ -2,33 +2,42 @@ import { useState } from "react";
 import loginService from "../Services/login"
 import {Button, Container, Row, Col} from "react-bootstrap";
 import Form from "react-bootstrap/Form";
-import {TOKEN_AUTH_KEY} from "../utility/Constants.js";
+import Auth from "../utility/constants/AuthConstants.js";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import {setAuthUser} from '../Redux/authReducer.js';
+import CryptoJS from 'crypto-js';
 const Login = ({ setError, setUser }) => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     let navigate = useNavigate();
+    const dispatch = useDispatch();
     const loggedIn = (user) => {
         window.localStorage.setItem(
-            TOKEN_AUTH_KEY, user.token
+            Auth.TOKEN_AUTH_KEY, JSON.stringify(user)
         )
         setUser(user);
         setUsername('');
         setPassword('');
         navigate("/logs");
+        dispatch(setAuthUser(user));
     }
     const handleLogin = async (event) => {
         event.preventDefault()
         try {
             const user = await loginService.login({
-                username, password
+                username,
+                password: CryptoJS.AES.encrypt(password, Auth.SECRET).toString()
             })
+            
             if (user.canAccess) {
                 loggedIn(user);
-            } else
-                setErrorMsg({ msg: "Request admin for access", variant: 'danger' })
+            } else {
+                setErrorMsg({ msg: "Request admin for access", variant: 'danger' });
+            }
 
         } catch (exception) {
+            console.log(exception)
             setErrorMsg({ msg: "Please enter correct username or password", variant: 'danger' })
         }
     }

@@ -53,3 +53,17 @@ footer {
   font-weight: '700';
   color: rgb(84, 92, 129);
 }
+
+.serachBox {
+  border: 'solid 1px black';
+  text-align: 'left';
+  margin: 10px;
+  height: 25px;
+  width: 400px;
+  display: 'inline-block';
+}
+
+.serachLabel{
+  margin-right: 5px;
+  display: inline-block;
+}

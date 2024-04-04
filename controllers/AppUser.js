@@ -1,7 +1,7 @@
 
 const userRouter = require("express").Router();
 const AppUser = require("../models/AppUser");
-const bcrypt = require("bcrypt");
+const CryptoJS = require("crypto-js");
 const express = require("express");
 const app = express();
 app.use(express.json());
@@ -9,9 +9,7 @@ app.use(express.json());
 userRouter.post("/", async (request, response) => {
     const { username, password } = request.body;
 
-    const saltRounds = 10;
-    const passwordHash = await bcrypt.hash(password, saltRounds);
-
+    const passwordHash = CryptoJS.AES.encrypt(password, process.env.SECRET).toString();
     const user = new AppUser({
         username,
         passwordHash,
