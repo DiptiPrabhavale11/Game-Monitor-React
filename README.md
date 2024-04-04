@@ -1,7 +1,7 @@
-# [Logs Monitor]()
+# [Logs Monitor](https://game-monitor.onrender.com/)
 
 It is an application to monitor the behavior of the players in a fun game called Noisrucer,
-which helps students in learning difficult and abstract algorithm concepts.
+which helps students in learning difficult and abstract algorithm concepts. Application is deployed using render [here](https://game-monitor.onrender.com/).
 ## Login Page
 ![Login Page](https://github.com/DiptiPrabhavale11/Game-Monitor-React/assets/113642858/f13571b9-fe90-4048-9ba5-9a41c3392691)
 
