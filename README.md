@@ -17,7 +17,11 @@ which helps students in learning difficult and abstract algorithm concepts. Appl
 ## Dashboard
 ![Dashboard](https://github.com/DiptiPrabhavale11/Game-Monitor-React/assets/113642858/4ebbe626-d185-4f3e-9dd4-c3f7fb4ae352)
 
-## Logs info of clicked of Bar
+![Dashoboard_2](https://github.com/DiptiPrabhavale11/Game-Monitor-React/assets/113642858/a76db4d0-ef20-4ce5-a930-44f87b38255f)
+
+![Dashoboard_3](https://github.com/DiptiPrabhavale11/Game-Monitor-React/assets/113642858/6f9877d6-f839-4c15-93e6-3957809e0095)
+
+## Logs details on click of Bar
 ![Clicked Bar Details](https://github.com/DiptiPrabhavale11/Game-Monitor-React/assets/113642858/97457f94-8c09-468f-9189-12c00f33d2d8)
 
 ## Sending Data to Log Monitor
