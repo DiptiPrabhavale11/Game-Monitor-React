@@ -33,7 +33,7 @@ const getSortedObject = (obj, sortKey) => {
 };
 
 const getTimestamp = (level, index) => {
-    return level.userInteractions[index] ? level.userInteractions[index].timestamp : null;
+    return level.userInteractions[index] ? level.userInteractions[index].timeStamp : null;
 }
 
 const getCountHashmap = (arr, key, keyMap) => {
