@@ -1,62 +1,34 @@
 import { useState, useEffect } from 'react';
 import Chart from 'chart.js/auto';
-import { Row, Modal } from 'react-bootstrap';
-import Filter from '../../utility/filters';
-import ChartConstants from '../../utility/constants/ChartConstants.js';
-import DisplayLogs from "../DisplayLogs.jsx";
+import { Row, Col, Modal } from 'react-bootstrap';
+import Form from 'react-bootstrap/Form';
+// import DisplayLogs from "../DisplayLogs.jsx";
 
-const Bar = ({ logs, type }) => {
-    const [index, setIndex] = useState(false);
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const [filteredLogs, setFilteredLogs] = useState([])
-    const [chartValues, setChartValues] = useState([]);
-    const [chartLabels, setchartLabels] = useState([]);
-    let barChart = null;
-    const filterData = (data) => {
-        let chartValuesArr = [];
-        let filteredLogsArr = []
-        let labelsArr = []
-        for (const period in ChartConstants.TIME_PERIODS) {
-            const value = ChartConstants.TIME_PERIODS[period].VALUE;
-            const filteredData = Filter.lastNDaysData(data, ChartConstants.START_TIME, value)
-            filteredLogsArr.push(filteredData);
-            chartValuesArr.push(filteredData.length);
-            labelsArr.push(ChartConstants.TIME_PERIODS[period].LABEL);
-        }
-        return { chartValuesArr, filteredLogsArr, labelsArr }
-    }
-
-    const setChartData = async (logs) => {
-        const filterObj = await filterData(logs);
-        await setFilteredLogs(filterObj.filteredLogsArr)
-        await setchartLabels(filterObj.labelsArr)
-        await setChartValues(filterObj.chartValuesArr);
-        renderChart(filterObj);
-    }
+const Bar = ({ chartData, chartTitle, labels, datasets, legendDisplay,
+    showModal, menuList, clickCallback, closeModalCallback, menuChangeCallback, modalComponent }) => {
+    const [myChart, setMyChart] = useState(null);
     useEffect(() => {
-        if(logs.length)
-            setChartData(logs);
-    }, [logs]);
+        // console.log("chartData", myChart, chartData, chartTitle, labels, datasets)
+        if (chartData && chartData.length) {
+            if (myChart) {
+                setMyChart(null);
+                myChart.destroy();
+            }
+            renderChart(chartData);
+        }
+    }, [chartData]);
 
-    const renderChart = (filterObj) => {
-        const ctx = document.getElementById(type);
-        const chartTitle = `${type} logs`
-        barChart = new Chart(ctx, {
+    const renderChart = () => {
+        const ctx = document.getElementById(chartTitle);
+        const chart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: filterObj.labelsArr,
-                datasets: [{
-                    data: filterObj.chartValuesArr,
-                    backgroundColor: [ChartConstants.LIGHT_ORANGE, ChartConstants.LIGHT_PINK, ChartConstants.SEA_BLUE,],
-                    borderColor: [ChartConstants.DARK_ORANGE, ChartConstants.DARK_PINK, ChartConstants.DARK_SEA_BLUE,],
-                    borderWidth: 1,
-                    maxBarThickness: 50
-                }]
+                labels,
+                datasets,
             }, options: {
                 plugins: {
                     legend: {
-                        display: false
+                        display: legendDisplay ? legendDisplay : false
                     },
                     title: {
                         display: true,
@@ -74,7 +46,7 @@ const Bar = ({ logs, type }) => {
                 onClick: (e, elements) => {
                     if (elements.length > 0) {
                         const index = elements[0].index;
-                        setIndex(index)
+                        clickCallback(index);
                         setShow(true)
                     }
                 }, scales: {
@@ -86,23 +58,47 @@ const Bar = ({ logs, type }) => {
                 },
             }
         });
+        setMyChart(chart);
     };
 
+    const handleClose = (e) => {
+        closeModalCallback(e);
+    }
+    const menuChange = (event) => {
+        if (myChart) {
+            myChart.destroy();
+        }
+        menuChangeCallback(event.target.value)
+    }
     return (<Row>
-        <canvas id={type} width="400" height="200"></canvas>
-        <Modal size="xl"
-            show={show}
+        <Row>
+            <Col md='6'>
+
+                {
+                    menuList && menuList.length &&
+                    <Form.Select aria-label="Default select example" size="sm" onChange={menuChange}>
+                        {menuList.map((menu) => (
+                            <option key={menu.LABEL} value={menu.VALUE}>{menu.LABEL}</option>)
+                        )}
+                    </Form.Select>
+                }
+
+            </Col>
+        </Row>
+        {chartTitle && <canvas id={chartTitle} width="400" height="200"></canvas>}
+        {showModal && modalComponent && <Modal size="xl"
+            show={showModal}
             onHide={handleClose}
             backdrop="static"
             keyboard={false}
         >
             <Modal.Header closeButton>
-                <Modal.Title>{chartLabels[index]} {type} logs</Modal.Title>
+                <Modal.Title>{chartLabels[index]} {chartTitle}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <DisplayLogs data={filteredLogs[index]} type={type} />
+                <modalComponent data={filteredLogs[index]} type={type}></modalComponent>
             </Modal.Body>
-        </Modal>
+        </Modal>}
     </Row>);
 };
 

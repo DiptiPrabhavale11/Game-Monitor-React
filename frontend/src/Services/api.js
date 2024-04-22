@@ -5,4 +5,8 @@ const getAll = (url) => {
     return request.then(response => response.data)
 }
 
-export default { getAll }
+const update = (url, body) => {
+    const request = Axios.post(url, body);
+    return request.then(response => response.data);
+}
+export default { getAll, update }

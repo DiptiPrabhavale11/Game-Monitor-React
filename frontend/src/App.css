@@ -54,6 +54,17 @@ footer {
   color: rgb(84, 92, 129);
 }
 
+.page-item.active .page-link {
+  z-index: 3;
+  color: #fff !important;
+  background-color: rgb(84, 92, 129) !important;
+  border: rgb(84, 92, 129) !important;
+}
+
+.page-link {
+  color: rgb(84, 92, 129) !important;
+}
+
 .serachBox {
   border: 'solid 1px black';
   text-align: 'left';
@@ -63,7 +74,11 @@ footer {
   display: 'inline-block';
 }
 
-.serachLabel{
+.serachLabel {
   margin-right: 5px;
   display: inline-block;
+}
+
+.chartBox {
+  border: solid 1px #cdc9c9;
 }

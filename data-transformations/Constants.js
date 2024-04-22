@@ -4,6 +4,7 @@ const Constants =  {
     "COMMAND": "command:",
     "ERROR": "error:",
     "PLAY": "play",
-    "WIN": "win:"
+    "WIN": "win:",
+    "TOP_3": 3
 };
 module.exports = Constants;

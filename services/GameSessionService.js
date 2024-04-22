@@ -13,7 +13,7 @@ const saveGameSession = async ({ request, convertedJson, response, gameSchema, l
         gameSession.levelSessions = gameSession.levelSessions.concat(r._id);
     });
     const token = request.token;
-    if (token !== null) {
+    if (token) {
         const user = await GetUser(token);
         gameSession.user = user._id;
     }

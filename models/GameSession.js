@@ -16,6 +16,8 @@ const gameSessionSchema = new mongoose.Schema({
 gameSessionSchema.set("toJSON", {
     transform: (document, returnedObject) => {
         returnedObject.gameSessionId = returnedObject._id.toString();
+        returnedObject.startTime = returnedObject.startTime.toUTCString();
+        returnedObject.endTime = returnedObject.endTime.toUTCString();
         delete returnedObject._id;
         delete returnedObject.__v;
     }

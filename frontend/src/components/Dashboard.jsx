@@ -1,41 +1,142 @@
-import { Container, Row, Col } from 'react-bootstrap';
-import Bar from './charts/Bar.jsx';
+import { Container, Row, Col } from "react-bootstrap";
+import LogsBar from "./charts/LogsBar.jsx";
+import Bar from "./charts/Bar.jsx";
 import { useEffect, useState } from "react";
 import Services from "../Services/api.js";
-import { INVALID_LOGS, LOGS } from "../utility/UrlEndpoints.js";
-import { useSelector } from 'react-redux';
+import UrlEndPoints from "../utility/UrlEndpoints.js";
+import ChartConstants from "../utility/constants/ChartConstants.js";
+import { useSelector } from "react-redux";
+import DisplayLogs from "./DisplayLogs.jsx";
 const Dashboard = () => {
     const [validLogs, setValidLogs] = useState([]);
     const [invalidLogs, setInvalidLogs] = useState([]);
+    const [popularLevels, setPopularLevels] = useState([]);
+    const [allPopularLevels, setAllPopularLevels] = useState([]);
+    const [longestLevels, setLongestLevels] = useState([]);
+    const [allLongestLevels, setAllLongestLevels] = useState([]);
+    const [popularLevelsChartDetails, setPopularLevelsChartDetails] = useState({});
+    const [longestLevelsChartDetails, setLongestLevelsChartDetails] = useState({});
+    const [averageGameSession, setAverageGameSession] = useState([]);
+    const [avgGameSessionChartDetails, setAvgGameSessionChartDetails] = useState({});
+    const [menuList, setMenuList] = useState(Object.values(ChartConstants.TIME_PERIODS));
     const logs = useSelector((state) => state.logs.allLogs);
+    const timePeriods = Object.values(ChartConstants.TIME_PERIODS).map(t => t.VALUE)
     useEffect(() => {
         if (logs && logs.length) {
             setValidLogs(logs)
         } else {
-            Services.getAll(LOGS)
+            Services.getAll(UrlEndPoints.LOGS)
                 .then(response => {
                     setValidLogs(response)
                 })
         }
 
-        Services.getAll(INVALID_LOGS)
+        Services.getAll(UrlEndPoints.INVALID_LOGS)
             .then(response => {
                 setInvalidLogs(response)
             })
+        Services.update(UrlEndPoints.POPULAR_LEVELS, { "days": timePeriods })
+            .then(response => {
+                const last24Hrs = response[timePeriods[0]];
+                setPopularLevels(last24Hrs);
+                setAllPopularLevels(response);
+                const chartDetails = getChartDetails(last24Hrs, timePeriods[0], ChartConstants.POPULAR_LEVELS, ChartConstants.POPULAR_LEVELS_DATASET_KEY);
+                setPopularLevelsChartDetails(chartDetails);
+            })
+        Services.update(UrlEndPoints.LONGEST_LEVELS, { "days": timePeriods })
+            .then(response => {
+                const last24Hrs = response[timePeriods[0]];
+                setLongestLevels(last24Hrs);
+                setAllLongestLevels(response);
+                const chartDetails = getChartDetails(last24Hrs, timePeriods[0], ChartConstants.LONGEST_LEVELS, ChartConstants.LONGEST_LEVELS_DATASET_KEY);
+                setLongestLevelsChartDetails(chartDetails);
+            })
+        Services.update(UrlEndPoints.AVERAGE_GAME_SESSION, { "days": timePeriods })
+            .then(response => {
+                setAverageGameSession(response);
+                const chartDetails = {
+                    chartTitle: ChartConstants.AVERAGE_GAME_SESSION,
+                    labels: Object.values(ChartConstants.TIME_PERIODS).map(t => t.LABEL),
+                    datasets: [{
+                        data: Object.values(response),
+                        backgroundColor: [ChartConstants.LIGHT_ORANGE, ChartConstants.LIGHT_PINK, ChartConstants.SEA_BLUE,],
+                        borderColor: [ChartConstants.DARK_ORANGE, ChartConstants.DARK_PINK, ChartConstants.DARK_SEA_BLUE,],
+                        borderWidth: 1,
+                        maxBarThickness: 50
+                    }]
+                };;
+                setAvgGameSessionChartDetails(chartDetails);
+            })
     }, []);
+    const getChartDetails = (dataArr, value, title, datasetKey) => {
+        const timePeriod = Object.values(ChartConstants.TIME_PERIODS).find(t => t.VALUE == value)
+        const chartDetails = {
+            chartTitle: `${title} - ${timePeriod.LABEL}`,
+            labels: dataArr.map(l => l.level),
+            datasets: [{
+                data: dataArr.map(l => l[datasetKey]),
+                backgroundColor: [ChartConstants.LIGHT_ORANGE, ChartConstants.LIGHT_PINK, ChartConstants.SEA_BLUE,],
+                borderColor: [ChartConstants.DARK_ORANGE, ChartConstants.DARK_PINK, ChartConstants.DARK_SEA_BLUE,],
+                borderWidth: 1,
+                maxBarThickness: 50
+            }]
+        };
+        return chartDetails;
+    }
+    const popularLevelsMenuChange = (menu) => {
+        const dataArr = allPopularLevels[menu];
+        const chartDetails = getChartDetails(dataArr, menu, ChartConstants.POPULAR_LEVELS, ChartConstants.POPULAR_LEVELS_DATASET_KEY);
+        setPopularLevelsChartDetails(chartDetails);
+        setPopularLevels(dataArr);
+    }
+    const longestLevelsMenuChange = (menu) => {
+        const dataArr = allLongestLevels[menu];
+        const chartDetails = getChartDetails(dataArr, menu, ChartConstants.LONGEST_LEVELS, ChartConstants.LONGEST_LEVELS_DATASET_KEY);
+        setLongestLevelsChartDetails(chartDetails);
+        setLongestLevels(dataArr);
+    }
     return (
         <>
             <h2 style={{ textAlign: 'center' }}>Dashboard</h2>
             <Container fluid>
-                <h4>Log Metrics</h4>
-                <Row className="justify-content-md-center">
-                    <Col md='5'>
-                        <Bar logs={validLogs}
-                            type="Valid"></Bar>
+                <Row className="mx-5">
+                    <Col md='5' className="chartBox px-4 py-4">
+                        <LogsBar logs={validLogs}
+                            type="Valid"></LogsBar>
                     </Col>
-                    <Col md='5'>
-                        <Bar logs={invalidLogs}
-                            type="Invalid"></Bar>
+                    <Col md='5' className="ms-5 chartBox px-4 py-4">
+                        <LogsBar logs={invalidLogs}
+                            type="Invalid"></LogsBar>
+                    </Col>
+                </Row>
+                <Row className="mx-5 py-5">
+                    <Col md='5' className="chartBox px-4 py-4">
+                        <Bar chartData={popularLevels}
+                            chartTitle={popularLevelsChartDetails.chartTitle}
+                            labels={popularLevelsChartDetails.labels}
+                            datasets={popularLevelsChartDetails.datasets}
+                            menuList={menuList}
+                            menuChangeCallback={popularLevelsMenuChange}
+                        ></Bar>
+                    </Col>
+                    <Col md='5' className="ms-5 chartBox px-4 py-4">
+                        <Bar chartData={longestLevels}
+                            chartTitle={longestLevelsChartDetails.chartTitle}
+                            labels={longestLevelsChartDetails.labels}
+                            datasets={longestLevelsChartDetails.datasets}
+                            menuList={menuList}
+                            menuChangeCallback={longestLevelsMenuChange}
+                        ></Bar>
+                    </Col>
+                </Row>
+                <Row className="mx-5">
+                    <Col md='5' className="chartBox px-4 py-4">
+                        <Bar chartData={Object.values(averageGameSession)}
+                            chartTitle={avgGameSessionChartDetails.chartTitle}
+                            labels={avgGameSessionChartDetails.labels}
+                            datasets={avgGameSessionChartDetails.datasets}
+                            modalComponent={DisplayLogs}
+                        ></Bar>
                     </Col>
                 </Row>
             </Container></>

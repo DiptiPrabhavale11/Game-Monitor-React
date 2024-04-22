@@ -11,6 +11,7 @@
     "lint": "eslint .",
     "lint:fix": "npm run lint -- --fix",
     "insert_data": "node db.js",
+    "build:render-ui": "npm install && rm -rf build && npm install --prefix frontend && rm -rf build && cd ./frontend && npm run build && cp -r dist ../build",
     "build:ui": "rm -rf build && cd ./frontend && npm run build && cp -r dist ../build",
     "deploy": "npm run build:ui && git add . && git commit -m npm_generated_rebuild_of_the_UI && git push"
   },
@@ -40,6 +41,7 @@
     "cross-env": "^7.0.3",
     "crypto-js": "^4.2.0",
     "d3": "^7.8.4",
+    "date-fns": "^3.6.0",
     "dotenv": "^16.4.1",
     "eslint-plugin-react": "^7.34.1",
     "eslint-plugin-react-hooks": "^4.6.0",

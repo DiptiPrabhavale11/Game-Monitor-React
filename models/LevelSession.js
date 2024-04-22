@@ -26,7 +26,7 @@ const levelSessionSchema = new mongoose.Schema({
     userInteractions: [{
         timeStamp: {
             type: Date,
-            required: true
+            required: true,
         },
         action: {
             type: String,
@@ -52,6 +52,14 @@ const levelSessionSchema = new mongoose.Schema({
 levelSessionSchema.set("toJSON", {
     transform: (document, returnedObject) => {
         returnedObject.levelSessionId = returnedObject._id.toString();
+        let userInteractions = returnedObject.userInteractions;
+        if (userInteractions && Array.isArray(userInteractions)) {
+            userInteractions = userInteractions.map(obj => ({
+                ...obj,
+                timeStamp: obj.timeStamp.toUTCString(),
+            }));
+            returnedObject.userInteractions = userInteractions;
+        }
         delete returnedObject._id;
         delete returnedObject.__v;
     }
