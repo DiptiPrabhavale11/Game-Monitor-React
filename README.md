@@ -1,14 +1,21 @@
-# [Logs Monitor]()
+# [Logs Monitor](https://game-monitor.onrender.com/)
 
 It is an application to monitor the behavior of the players in a fun game called Noisrucer,
-which helps students in learning difficult and abstract algorithm concepts.
+which helps students in learning difficult and abstract algorithm concepts. Application is deployed using render [here](https://game-monitor.onrender.com/).
+## Login Page
 ![Login Page](https://github.com/DiptiPrabhavale11/Game-Monitor-React/assets/113642858/f13571b9-fe90-4048-9ba5-9a41c3392691)
 
+## Logs Page
 ![Logs Page](https://github.com/DiptiPrabhavale11/Game-Monitor-React/assets/113642858/03a5a948-e0b4-44c3-858e-a613c692a7fb)
 
+## Log Details
 ![Log details](https://github.com/DiptiPrabhavale11/Game-Monitor-React/assets/113642858/dc190114-1e2e-49fb-94e7-cd5d23c97297)
 
-![Dashboard](https://github.com/DiptiPrabhavale11/Game-Monitor-React/assets/113642858/4e22a0d6-9c31-4f0e-a64a-857a4a636a6f)
+## Dashboard
+![Dashboard](https://github.com/DiptiPrabhavale11/Game-Monitor-React/assets/113642858/aacb9d92-5041-463c-b6a4-75fc45c9920d)
+
+## Logs info of clicked of Bar
+![Clicked Bar Details](https://github.com/DiptiPrabhavale11/Game-Monitor-React/assets/113642858/97457f94-8c09-468f-9189-12c00f33d2d8)
 
 ## Sending Data to Log Monitor
  The [section](Documentation/C%23Adaptor.md) outlines the process of sending log 
