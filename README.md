@@ -6,13 +6,16 @@ which helps students in learning difficult and abstract algorithm concepts. Appl
 ![Login Page](https://github.com/DiptiPrabhavale11/Game-Monitor-React/assets/113642858/f13571b9-fe90-4048-9ba5-9a41c3392691)
 
 ## Logs Page
-![Logs Page](https://github.com/DiptiPrabhavale11/Game-Monitor-React/assets/113642858/03a5a948-e0b4-44c3-858e-a613c692a7fb)
+![Logs Page](https://github.com/DiptiPrabhavale11/Game-Monitor-React/assets/113642858/95527c43-f6e2-4733-a1d5-66996811bcb0)
 
 ## Log Details
 ![Log details](https://github.com/DiptiPrabhavale11/Game-Monitor-React/assets/113642858/dc190114-1e2e-49fb-94e7-cd5d23c97297)
 
+## Pagination
+![Pagination](https://github.com/DiptiPrabhavale11/Game-Monitor-React/assets/113642858/5e216852-c214-4e88-970c-193245d1be82)
+
 ## Dashboard
-![Dashboard](https://github.com/DiptiPrabhavale11/Game-Monitor-React/assets/113642858/aacb9d92-5041-463c-b6a4-75fc45c9920d)
+![Dashboard](https://github.com/DiptiPrabhavale11/Game-Monitor-React/assets/113642858/4ebbe626-d185-4f3e-9dd4-c3f7fb4ae352)
 
 ## Logs info of clicked of Bar
 ![Clicked Bar Details](https://github.com/DiptiPrabhavale11/Game-Monitor-React/assets/113642858/97457f94-8c09-468f-9189-12c00f33d2d8)
