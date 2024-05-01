@@ -20,7 +20,7 @@ const errorHandler = (error, request, response, next) => {
         return response.status(400).send({ error: "malformatted id" });
     } else if (error.name === "ValidationError") {
         return response.status(400).json({ error: error.message });
-    }else if(error.name === "JsonWebTokenError")
+    } else if (error.name === "JsonWebTokenError")
         return response.status(401).json({ error: error.message });
     else if (error.name === "TokenExpiredError")
         return response.status(401).json({ error: "token expired" });
@@ -28,16 +28,16 @@ const errorHandler = (error, request, response, next) => {
 };
 
 const auth = (request, response, next) => {
-    const token = request.headers.authorization?.split(" ")[1];
-    if (request.method === "GET") {
+    if (request.originalUrl === "/api/logs" && request.method === "POST") {
+        next();
+    } else {
+        const token = request.headers.authorization?.split(" ")[1];
         const decodedToken = jwt.verify(token, process.env.SECRET);
         if (!decodedToken.id) {
             return response.status(401).json({ error: "token invalid" });
         } else {
             next();
         }
-    } else {
-        next();
     }
 };
 

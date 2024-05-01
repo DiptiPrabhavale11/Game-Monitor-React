@@ -10,6 +10,7 @@
     "dev": "cross-env NODE_ENV=dev nodemon index.js",
     "lint": "eslint .",
     "lint:fix": "npm run lint -- --fix",
+    "lint:all": "npm run lint && cd ./frontend && npm run lint",
     "insert_data": "node db.js",
     "build:render-ui": "npm install && rm -rf build && npm install --prefix frontend && rm -rf build && cd ./frontend && npm run build && cp -r dist ../build",
     "build:ui": "rm -rf build && cd ./frontend && npm run build && cp -r dist ../build",

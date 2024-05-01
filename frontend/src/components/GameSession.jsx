@@ -23,7 +23,7 @@ const GameSession = ({ game, gameClick ,isValid}) => {
     const displayDetails = (game) => {
         return (<>
             {startAndEndTime(game)}
-            {game.levelSessions && game.levelSessions.map(level => <LevelSession level={level} key={level.levelSessionId}></LevelSession>)}
+            {game.levelSessions && game.levelSessions.map(level => <LevelSession level={level} key={level.levelSessionId} collapsed={1}></LevelSession>)}
         </>);
     };
     return (<Container fluid>

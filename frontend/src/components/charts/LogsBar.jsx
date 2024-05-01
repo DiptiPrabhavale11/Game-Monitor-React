@@ -10,9 +10,7 @@ const LogsBar = ({ logs, type }) => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const [filteredLogs, setFilteredLogs] = useState([])
-    const [chartValues, setChartValues] = useState([]);
     const [chartLabels, setchartLabels] = useState([]);
-    let barChart = null;
     const filterData = (data) => {
         let chartValuesArr = [];
         let filteredLogsArr = []
@@ -31,18 +29,18 @@ const LogsBar = ({ logs, type }) => {
         const filterObj = await filterData(logs);
         await setFilteredLogs(filterObj.filteredLogsArr)
         await setchartLabels(filterObj.labelsArr)
-        await setChartValues(filterObj.chartValuesArr);
         renderChart(filterObj);
     }
     useEffect(() => {
         if(logs.length)
             setChartData(logs);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [logs]);
 
     const renderChart = (filterObj) => {
         const ctx = document.getElementById(type);
         const chartTitle = `${type} logs`
-        barChart = new Chart(ctx, {
+        new Chart(ctx, {
             type: 'bar',
             data: {
                 labels: filterObj.labelsArr,

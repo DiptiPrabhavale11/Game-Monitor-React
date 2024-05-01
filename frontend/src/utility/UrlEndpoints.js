@@ -5,4 +5,6 @@ const LOGIN = `${baseUrl}/api/login`;
 const POPULAR_LEVELS = `${baseUrl}/api/logs/popular-levels`;
 const LONGEST_LEVELS = `${baseUrl}/api/logs/longest-levels`;
 const AVERAGE_GAME_SESSION = `${baseUrl}/api/logs/average-gamesession`;
-export default { LOGS, INVALID_LOGS, LOGIN, POPULAR_LEVELS, LONGEST_LEVELS, AVERAGE_GAME_SESSION };
+const COMMON_ERRORS = `${baseUrl}/api/logs/common-errors`;
+
+export default { LOGS, INVALID_LOGS, LOGIN, POPULAR_LEVELS, LONGEST_LEVELS, AVERAGE_GAME_SESSION, COMMON_ERRORS };

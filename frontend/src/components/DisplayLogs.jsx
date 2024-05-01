@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Col, FloatingLabel, Row, InputGroup } from "react-bootstrap";
+import { Col, Row, InputGroup } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import GameSession from './GameSession';
 import Localization from "../utility/Localization";
@@ -8,20 +8,20 @@ import { useDispatch } from 'react-redux';
 import { setFilteredLogs } from "../Redux/logsReducer.js";
 import Pagination from 'react-bootstrap/Pagination';
 import { useSelector } from "react-redux";
-
+import GameConstants from '../utility/constants/GameConstants.js';
 const DisplayLogs = ({ data, type }) => {
     const [gameSessions, setGameSessions] = useState([]);
     const [searchText, setSearchText] = useState("");
     const isValid = type === "Valid";
     const dispatch = useDispatch();
     const [activePage, setActivePage] = useState(1);
-    const itemsPerPage = 8;
+    const itemsPerPage = GameConstants.ITEMS_PER_PAGE;
     let totalPages;
     const filteredLogs = useSelector((state) => state.logs.filteredLogs);
-    const allLogs = useSelector((state) => state.logs.allLogs);
     useEffect(() => {
         setGameSessions(data);
         dispatch(setFilteredLogs(data));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [data])
     const gameClick = (game) => {
         const sessions = gameSessions.map(g => {
@@ -56,6 +56,7 @@ const DisplayLogs = ({ data, type }) => {
     }
     const serarchGameSession = (event) => {
         const search = event.target.value;
+        setActivePage(1);
         if (search.length) {
             const filteredSessions = data.filter(item =>
                 item.gameSessionId.includes(search)

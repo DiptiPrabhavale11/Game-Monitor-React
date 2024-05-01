@@ -5,8 +5,12 @@ import Form from 'react-bootstrap/Form';
 // import DisplayLogs from "../DisplayLogs.jsx";
 
 const Bar = ({ chartData, chartTitle, labels, datasets, legendDisplay,
-    showModal, menuList, clickCallback, closeModalCallback, menuChangeCallback, modalComponent }) => {
+    menuList, clickCallback, closeModalCallback, menuChangeCallback, modalcomponent }) => {
     const [myChart, setMyChart] = useState(null);
+    const [showModal, setShowModal] = useState(false);
+    const [modalTitle, setModalTitle] = useState("");
+    const [modalData, setModalData] = useState({});
+    const ModalComponent = modalcomponent;
     useEffect(() => {
         // console.log("chartData", myChart, chartData, chartTitle, labels, datasets)
         if (chartData && chartData.length) {
@@ -16,6 +20,7 @@ const Bar = ({ chartData, chartTitle, labels, datasets, legendDisplay,
             }
             renderChart(chartData);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [chartData]);
 
     const renderChart = () => {
@@ -46,8 +51,9 @@ const Bar = ({ chartData, chartTitle, labels, datasets, legendDisplay,
                 onClick: (e, elements) => {
                     if (elements.length > 0) {
                         const index = elements[0].index;
-                        clickCallback(index);
-                        setShow(true)
+                        setModalTitle(labels[index])
+                        setModalData(clickCallback(labels[index]));
+                        setShowModal(true);
                     }
                 }, scales: {
                     x: {
@@ -62,7 +68,8 @@ const Bar = ({ chartData, chartTitle, labels, datasets, legendDisplay,
     };
 
     const handleClose = (e) => {
-        closeModalCallback(e);
+        setShowModal(false);
+        closeModalCallback && closeModalCallback(e);
     }
     const menuChange = (event) => {
         if (myChart) {
@@ -86,17 +93,17 @@ const Bar = ({ chartData, chartTitle, labels, datasets, legendDisplay,
             </Col>
         </Row>
         {chartTitle && <canvas id={chartTitle} width="400" height="200"></canvas>}
-        {showModal && modalComponent && <Modal size="xl"
+        {showModal && modalcomponent && <Modal size="xl"
             show={showModal}
             onHide={handleClose}
             backdrop="static"
             keyboard={false}
         >
             <Modal.Header closeButton>
-                <Modal.Title>{chartLabels[index]} {chartTitle}</Modal.Title>
+                <Modal.Title>{modalTitle}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <modalComponent data={filteredLogs[index]} type={type}></modalComponent>
+                <ModalComponent level={modalData} collapsed={1}></ModalComponent>
             </Modal.Body>
         </Modal>}
     </Row>);

@@ -1,4 +1,4 @@
-const Constants = require("./Constants");
+const Constants = require("./ConversionConstants");
 
 const convertCommand = (log) => {
     let commandStr = log.UserInteraction.replace(Constants.COMMAND, "").trim();
@@ -49,11 +49,12 @@ const convertInteraction = (log) => {
     };
 };
 
-const convertPlay = (log) => {
+const  convertPlayAndCommandTree = (log,nextInteraction) => {
+    let commandTreeStr = nextInteraction.UserInteraction.replace(Constants.COMMAND_TREE, "").trim();
     return {
         action: log.UserInteraction,
         timeStamp: convertToDateObj(log.TimeStamp),
-        commandTree: log.commandTree,
+        commandTree:JSON.parse(commandTreeStr),
     };
 };
 
@@ -62,7 +63,6 @@ const conversionMap = {
     [Constants.COMMAND]: convertCommand,
     [Constants.ERROR]: convertError,
     [Constants.WIN]: convertWin,
-    [Constants.PLAY]: convertPlay
 };
 
 const convertToDateObj =(timestamp) => {
@@ -83,22 +83,35 @@ const convertJson = (obj) => {
         gameSessionObj.startTime = convertToDateObj(logs[0].TimeStamp);
         gameSessionObj.endTime = convertToDateObj(logs.slice(-1)[0].TimeStamp);
         let levelSessionObj = { levelName: "", userInteractions: [] };
+        let recentCommandTreeIndex = null;
         logs.forEach((log, index, arr) => {
             let shouldInsertAction = true;
             if (log.UserInteraction.includes(Constants.LEVEL_NAME)) {
                 ({ levelSessions, levelSessionObj } = convertLevel(index, levelSessions, levelSessionObj, log));
-                shouldInsertAction = false;
             } else {
-                for (const key in conversionMap) {
-                    if (log.UserInteraction.includes(key)) {
-                        const convertedObj = conversionMap[key](log, levelSessionObj);
-                        shouldInsertAction = false;
-                        levelSessionObj.userInteractions = levelSessionObj.userInteractions.concat(convertedObj);
-                        break;
+                if (log.UserInteraction === Constants.PLAY) {
+                    //The next interaction after Play is always commandTree;
+                    // Appending commandTree with Play action here
+                    recentCommandTreeIndex = index + 1;
+                    const convertedObj = convertPlayAndCommandTree(log, arr[recentCommandTreeIndex]);
+                    levelSessionObj.userInteractions = levelSessionObj.userInteractions.concat(convertedObj);
+                } else if (index === recentCommandTreeIndex) {
+                    // Skipping the commandTree interaction as we have
+                    // previously recorded in the Play interaction
+                    return;
+                } else {
+                    for (const key in conversionMap) {
+                        if (log.UserInteraction.includes(key)) {
+                            const convertedObj = conversionMap[key](log, levelSessionObj);
+                            shouldInsertAction = false;
+                            levelSessionObj.userInteractions = levelSessionObj.userInteractions.concat(convertedObj);
+                            break;
+                        }
                     }
-                }
-                if (shouldInsertAction) {
-                    convertInteraction(log, levelSessionObj);
+                    if (shouldInsertAction) {
+                        const action = convertInteraction(log, levelSessionObj);
+                        levelSessionObj.userInteractions = levelSessionObj.userInteractions.concat(action);
+                    }
                 }
             }
             if (index === arr.length - 1) {

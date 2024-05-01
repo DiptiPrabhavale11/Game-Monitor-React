@@ -1,22 +1,15 @@
 const mongoose = require("mongoose").set("strictQuery", true);
 
-const commandTree = new mongoose.Schema({
-    moves: [{
-        command: String,
-        leftChild: String,
-        rightChild: String,
-        parent: String
-    }],
-    funcDefs: [{
+const commandTreeDef = new mongoose.Schema(
+    {
+        _id: false,
         funcName: String,
-        funcMoves: [{
-            command: String,
-            leftChild: String,
-            rightChild: String,
-            parent: String
+        funcDef: [{
+            _id: false,
+            command: String
         }]
-    }]
-});
+    }
+);
 // Represents the user interaction data recorded at each level.
 const levelSessionSchema = new mongoose.Schema({
     levelName: {
@@ -43,12 +36,11 @@ const levelSessionSchema = new mongoose.Schema({
         },
         msg: String,
         commandTree: {
-            type: commandTree,
-            required: false
-        }
+            type: [commandTreeDef],
+            default: undefined
+        },
     }],
 });
-
 levelSessionSchema.set("toJSON", {
     transform: (document, returnedObject) => {
         returnedObject.levelSessionId = returnedObject._id.toString();

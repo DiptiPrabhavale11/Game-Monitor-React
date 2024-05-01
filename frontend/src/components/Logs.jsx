@@ -14,6 +14,7 @@ const Logs = ({type}) => {
                 setData(response);
                 dispatch(setLogs(response));
             })
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (

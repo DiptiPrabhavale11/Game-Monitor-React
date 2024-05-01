@@ -13,7 +13,7 @@ import { useEffect, useState } from "react";
 import { Alert } from "react-bootstrap";
 import Auth from "./utility/constants/AuthConstants.js"
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setAuthUser } from './Redux/authReducer.js';
 const App = () => {
   const retrieveUser = () => localStorage.getItem(Auth.TOKEN_AUTH_KEY) || null;
@@ -23,11 +23,12 @@ const App = () => {
   const dispatch = useDispatch();
   
   useEffect(() => {
-    if (!user) {
-      navigate("/login");
-    } else {
-      dispatch(setAuthUser(user));
-    }
+      if (!user) {
+          navigate("/login");
+      } else {
+          dispatch(setAuthUser(user));
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (

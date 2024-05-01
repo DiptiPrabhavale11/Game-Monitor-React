@@ -5,8 +5,10 @@ import { useEffect, useState } from "react";
 import Services from "../Services/api.js";
 import UrlEndPoints from "../utility/UrlEndpoints.js";
 import ChartConstants from "../utility/constants/ChartConstants.js";
+import GameConstants from "../utility/constants/GameConstants.js";
 import { useSelector } from "react-redux";
-import DisplayLogs from "./DisplayLogs.jsx";
+import LevelSession from "./LevelSession.jsx";
+import CommonErrors from "./Highlights/CommonErrors.jsx";
 const Dashboard = () => {
     const [validLogs, setValidLogs] = useState([]);
     const [invalidLogs, setInvalidLogs] = useState([]);
@@ -18,7 +20,7 @@ const Dashboard = () => {
     const [longestLevelsChartDetails, setLongestLevelsChartDetails] = useState({});
     const [averageGameSession, setAverageGameSession] = useState([]);
     const [avgGameSessionChartDetails, setAvgGameSessionChartDetails] = useState({});
-    const [menuList, setMenuList] = useState(Object.values(ChartConstants.TIME_PERIODS));
+    const menuList= Object.values(ChartConstants.TIME_PERIODS);
     const logs = useSelector((state) => state.logs.allLogs);
     const timePeriods = Object.values(ChartConstants.TIME_PERIODS).map(t => t.VALUE)
     useEffect(() => {
@@ -64,13 +66,14 @@ const Dashboard = () => {
                         borderWidth: 1,
                         maxBarThickness: 50
                     }]
-                };;
+                };
                 setAvgGameSessionChartDetails(chartDetails);
             })
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     const getChartDetails = (dataArr, value, title, datasetKey) => {
         const timePeriod = Object.values(ChartConstants.TIME_PERIODS).find(t => t.VALUE == value)
-        const chartDetails = {
+        return {
             chartTitle: `${title} - ${timePeriod.LABEL}`,
             labels: dataArr.map(l => l.level),
             datasets: [{
@@ -81,7 +84,6 @@ const Dashboard = () => {
                 maxBarThickness: 50
             }]
         };
-        return chartDetails;
     }
     const popularLevelsMenuChange = (menu) => {
         const dataArr = allPopularLevels[menu];
@@ -94,6 +96,15 @@ const Dashboard = () => {
         const chartDetails = getChartDetails(dataArr, menu, ChartConstants.LONGEST_LEVELS, ChartConstants.LONGEST_LEVELS_DATASET_KEY);
         setLongestLevelsChartDetails(chartDetails);
         setLongestLevels(dataArr);
+    }
+    const findLevel = (arr, key, match) => {
+        return arr.find(l => l[key] === match);
+    }
+    const longestLevelsclickCallback = (value) => {
+        return findLevel(longestLevels, GameConstants.LEVEL, value);
+    }
+    const popularLevelsclickCallback = (selection) => {
+        return findLevel(popularLevels, GameConstants.LEVEL, selection);
     }
     return (
         <>
@@ -117,6 +128,8 @@ const Dashboard = () => {
                             datasets={popularLevelsChartDetails.datasets}
                             menuList={menuList}
                             menuChangeCallback={popularLevelsMenuChange}
+                            modalcomponent={LevelSession}
+                            clickCallback={popularLevelsclickCallback}
                         ></Bar>
                     </Col>
                     <Col md='5' className="ms-5 chartBox px-4 py-4">
@@ -126,6 +139,8 @@ const Dashboard = () => {
                             datasets={longestLevelsChartDetails.datasets}
                             menuList={menuList}
                             menuChangeCallback={longestLevelsMenuChange}
+                            modalcomponent={LevelSession}
+                            clickCallback={longestLevelsclickCallback}
                         ></Bar>
                     </Col>
                 </Row>
@@ -135,8 +150,10 @@ const Dashboard = () => {
                             chartTitle={avgGameSessionChartDetails.chartTitle}
                             labels={avgGameSessionChartDetails.labels}
                             datasets={avgGameSessionChartDetails.datasets}
-                            modalComponent={DisplayLogs}
                         ></Bar>
+                    </Col>
+                    <Col md='5' className="ms-5 chartBox px-4 py-4">
+                        <CommonErrors></CommonErrors>
                     </Col>
                 </Row>
             </Container></>

@@ -11,7 +11,7 @@ app.use(express.json());
 const JsonConverter = require("../data-transformations/JsonConverter");
 const Validator = require("../Utils/validations");
 const GameSessionService = require("../services/GameSessionService");
-const Constants = require("../data-transformations/Constants");
+const APIConstants = require("../Constants/APIConstants");
 
 const saveGame = async (request, response) => {
     if (!request.body || !request.body.metricsList)
@@ -55,8 +55,7 @@ gameSessionRouter.post("/", async (request, response) => {
 });
 
 gameSessionRouter.get("/", async (request, response) => {
-    const gameSessions = await GameSession.find({})
-        .populate("levelSessions", {});
+    const gameSessions = await fetchGameSessions();
     response.json(gameSessions);
 });
 
@@ -68,38 +67,36 @@ gameSessionRouter.get("/errors", async (request, response) => {
 
 gameSessionRouter.post("/popular-levels", async (request, response) => {
     const days = request.body.days;
-    const gameSessions = await GameSession.find({})
-        .populate("levelSessions", {});
+    const gameSessions = await fetchGameSessions();
     const levels = [];
     gameSessions.forEach(game => levels.push(...game.levelSessions));
     const dayWisePopoularity = {};
     for (let day in days) {
-        const filteredData = Filters.lastNDaysLevelData(levels, "userInteractions", 0, "timeStamp", Number(days[day]));
+        const filteredData = Filters.lastNDaysLevelData(levels, APIConstants.USER_INTERACTIONS, 0, "timeStamp", Number(days[day]));
         //Generate level object with it's count
-        let levelObj = Filters.getCountHashmap(filteredData, "levelName", { "levelSessionId": "_id" });
+        let levelObj = Filters.getCountHashmap(filteredData, APIConstants.LEVEL_NAME, { "levelSessionId": "_id" });
         // Sort levelObj based on count
-        const levelArr = Filters.getSortedObject(levelObj, "count");
+        const levelArr = Filters.getSortedObject(levelObj, APIConstants.COUNT, APIConstants.LEVEL);
         // Extract top 3 levels
-        dayWisePopoularity[days[day]] = Filters.getTopResults(levelArr, Constants.TOP_3);
+        dayWisePopoularity[days[day]] = Filters.getTopResults(levelArr, APIConstants.TOP_3);
     }
     response.json(dayWisePopoularity);
 });
 
 gameSessionRouter.post("/longest-levels", async (request, response) => {
     const days = request.body.days;
-    const gameSessions = await GameSession.find({})
-        .populate("levelSessions", {});
+    const gameSessions = await fetchGameSessions();
     const levels = [];
     gameSessions.forEach(game => levels.push(...game.levelSessions));
     const dayWiseLongestLevel = {};
     for (let day in days) {
-        const filteredData = Filters.lastNDaysLevelData(levels, "userInteractions", 0, "timeStamp", Number(days[day]));
+        const filteredData = Filters.lastNDaysLevelData(levels, APIConstants.USER_INTERACTIONS, 0, "timeStamp", Number(days[day]));
         //Generate level object with it's time difference
-        let levelObj = Filters.getLevelTimeHashmap(filteredData, "levelName", { "levelSessionId": "_id" });
+        let levelObj = Filters.getLevelTimeHashmap(filteredData, APIConstants.LEVEL_NAME, { "levelSessionId": "_id" });
         // Sort levelObj based on time difference
-        const levelArr = Filters.getSortedObject(levelObj, "timeDiff");
+        const levelArr = Filters.getSortedObject(levelObj, APIConstants.TIME_DIFF, APIConstants.LEVEL);
         // Extract top 3 levels with longest time difference
-        dayWiseLongestLevel[days[day]] = Filters.getTopResults(levelArr, Constants.TOP_3);
+        dayWiseLongestLevel[days[day]] = Filters.getTopResults(levelArr, APIConstants.TOP_3);
     }
     response.json(dayWiseLongestLevel);
 });
@@ -122,6 +119,19 @@ gameSessionRouter.post("/average-gamesession", async (request, response) => {
     }
     response.json(dayWiseAvgGameSession);
 });
+
+gameSessionRouter.post("/common-errors", async (request, response) => {
+    const days = request.body.days;
+    const gameSessions = await fetchGameSessions();
+    const errorMsgWithCount = GameSessionService.getMostCommonErrors(gameSessions,days);
+    response.json(errorMsgWithCount);
+});
+
+const fetchGameSessions =async () => {
+    return GameSession.find({})
+        .populate("levelSessions", {});
+};
+
 
 module.exports = gameSessionRouter;
 
