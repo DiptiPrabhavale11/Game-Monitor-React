@@ -1,4 +1,4 @@
-# [Noisrucer Monitor](https://noisrucer.onrender.com/)
+# [Noisrucer Monitor](https://game-monitor.onrender.com/)
 
 Noisrucer Monitor is an application designed to track and analyze player behavior 
 in the educational game called Noisrucer. This game facilitates learning 
@@ -6,7 +6,7 @@ complex algorithmic concepts through interactive gameplay.
 
 ## 🌐Application URL 
 
-To access the application, visit the [production URL](https://noisrucer.onrender.com/),
+To access the application, visit the [production URL](https://game-monitor.onrender.com/),
 We have testing environment as well which can be accessed using [application test URL](https://noisrucer-test.onrender.com/). Testing environment can be specially used for verifying different logs and mocking data from the Noisrucer game.
 
 ## 🚀 Getting Started
