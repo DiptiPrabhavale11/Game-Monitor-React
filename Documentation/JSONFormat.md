@@ -441,3 +441,7 @@ The following provides descriptions for the keys in the processed JSON data
                 - **funcName**:  Represents the name of the function
 
 </p></details>
+
+## Sending Data to Noisrucer Monitor
+
+The [section](Documentation/C%23Adaptor.md) outlines the process of sending log data via API calls.

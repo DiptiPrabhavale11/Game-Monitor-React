@@ -1,0 +1,386 @@
+{
+	"info": {
+		"_postman_id": "bfb82ce6-40b0-4780-b34d-409c78236052",
+		"name": "EDCSDEV",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25906541",
+		"_collection_link": "https://crimson-robot-522120.postman.co/workspace/COMP-227~58a5b595-504f-4e5b-a000-8e316105b387/collection/25906541-bfb82ce6-40b0-4780-b34d-409c78236052?action=share&source=collection_link&creator=25906541"
+	},
+	"item": [
+		{
+			"name": "LogsAPIs",
+			"item": [
+				{
+					"name": "Post log",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"metricsList\": [\n    {\n      \"TimeStamp\": \"04/28/2024 10:28:18 PM\",\n      \"UserInteraction\": \"levelName:default_level.json\"\n    },\n    {\n      \"TimeStamp\": \"04/28/2024 10:28:20 PM\",\n      \"UserInteraction\": \"category:MovementCommandPaletteButton\"\n    },\n    {\n      \"TimeStamp\": \"04/28/2024 10:28:23 PM\",\n      \"UserInteraction\": \"command: {\\\"move\\\":\\\"MOVE_FORWARD\\\", \\\"leftChild\\\":null, \\\"rightChild\\\":null, \\\"parent\\\":null, \\\"parentAlt\\\":null, \\\"isRemovable\\\":true, \\\"isSlot\\\":false}\"\n    },\n    {\n      \"TimeStamp\": \"04/28/2024 10:28:24 PM\",\n      \"UserInteraction\": \"command: {\\\"move\\\":\\\"MOVE_FORWARD\\\", \\\"leftChild\\\":null, \\\"rightChild\\\":null, \\\"parent\\\":\\\"MOVE_FORWARD\\\", \\\"parentAlt\\\":null, \\\"isRemovable\\\":true, \\\"isSlot\\\":false}\"\n    },\n    {\n      \"TimeStamp\": \"04/28/2024 10:28:27 PM\",\n      \"UserInteraction\": \"Play\"\n    },\n    {\n      \"TimeStamp\": \"04/28/2024 10:28:27 PM\",\n      \"UserInteraction\": \"commandTree:[{\\\"funcName\\\":\\\"CALL_FUNCTION_MAIN\\\",\\\"funcDef\\\":[{\\\"command\\\":\\\"MOVE_FORWARD\\\"},{\\\"command\\\":\\\"MOVE_FORWARD\\\"}]},{\\\"funcName\\\":\\\"CALL_FUNCTION_1\\\",\\\"funcDef\\\":[]},{\\\"funcName\\\":\\\"CALL_FUNCTION_2\\\",\\\"funcDef\\\":[]},{\\\"funcName\\\":\\\"CALL_FUNCTION_3\\\",\\\"funcDef\\\":[]}]\"\n    },\n    {\n      \"TimeStamp\": \"04/28/2024 10:28:30 PM\",\n      \"UserInteraction\": \"Stop\"\n    },\n    {\n      \"TimeStamp\": \"04/28/2024 10:28:30 PM\",\n      \"UserInteraction\": \"Stop\"\n    },\n    {\n      \"TimeStamp\": \"04/28/2024 10:28:31 PM\",\n      \"UserInteraction\": \"command: {\\\"move\\\":\\\"TURN_COUNTER_CLOCKWISE\\\", \\\"leftChild\\\":null, \\\"rightChild\\\":null, \\\"parent\\\":\\\"MOVE_FORWARD\\\", \\\"parentAlt\\\":null, \\\"isRemovable\\\":true, \\\"isSlot\\\":false}\"\n    },\n    {\n      \"TimeStamp\": \"04/28/2024 10:28:34 PM\",\n      \"UserInteraction\": \"Play\"\n    },\n    {\n      \"TimeStamp\": \"04/28/2024 10:28:35 PM\",\n      \"UserInteraction\": \"commandTree:[{\\\"funcName\\\":\\\"CALL_FUNCTION_MAIN\\\",\\\"funcDef\\\":[{\\\"command\\\":\\\"MOVE_FORWARD\\\"},{\\\"command\\\":\\\"MOVE_FORWARD\\\"},{\\\"command\\\":\\\"TURN_COUNTER_CLOCKWISE\\\"},{\\\"command\\\":\\\"MOVE_FORWARD\\\"},{\\\"command\\\":\\\"MOVE_FORWARD\\\"},{\\\"command\\\":\\\"TURN_COUNTER_CLOCKWISE\\\"},{\\\"command\\\":\\\"MOVE_FORWARD\\\"},{\\\"command\\\":\\\"MOVE_FORWARD\\\"},{\\\"command\\\":\\\"MOVE_FORWARD\\\"}]},{\\\"funcName\\\":\\\"CALL_FUNCTION_1\\\",\\\"funcDef\\\":[]},{\\\"funcName\\\":\\\"CALL_FUNCTION_2\\\",\\\"funcDef\\\":[]},{\\\"funcName\\\":\\\"CALL_FUNCTION_3\\\",\\\"funcDef\\\":[]}]\"\n    },\n    {\n      \"TimeStamp\": \"04/28/2024 10:28:39 PM\",\n      \"UserInteraction\": \"Stop\"\n    },\n    {\n      \"TimeStamp\": \"04/28/2024 10:28:39 PM\",\n      \"UserInteraction\": \"Stop\"\n    },\n    {\n      \"TimeStamp\": \"04/28/2024 10:28:42 PM\",\n      \"UserInteraction\": \"Play\"\n    },\n    {\n      \"TimeStamp\": \"04/28/2024 10:28:42 PM\",\n      \"UserInteraction\": \"commandTree:[{\\\"funcName\\\":\\\"CALL_FUNCTION_MAIN\\\",\\\"funcDef\\\":[{\\\"command\\\":\\\"MOVE_FORWARD\\\"},{\\\"command\\\":\\\"MOVE_FORWARD\\\"},{\\\"command\\\":\\\"TURN_COUNTER_CLOCKWISE\\\"},{\\\"command\\\":\\\"MOVE_FORWARD\\\"},{\\\"command\\\":\\\"MOVE_FORWARD\\\"},{\\\"command\\\":\\\"TURN_COUNTER_CLOCKWISE\\\"},{\\\"command\\\":\\\"MOVE_FORWARD\\\"},{\\\"command\\\":\\\"MOVE_FORWARD\\\"},{\\\"command\\\":\\\"MOVE_FORWARD\\\"},{\\\"command\\\":\\\"MOVE_FORWARD\\\"}]},{\\\"funcName\\\":\\\"CALL_FUNCTION_1\\\",\\\"funcDef\\\":[]},{\\\"funcName\\\":\\\"CALL_FUNCTION_2\\\",\\\"funcDef\\\":[]},{\\\"funcName\\\":\\\"CALL_FUNCTION_3\\\",\\\"funcDef\\\":[]}]\"\n    },\n    {\n      \"TimeStamp\": \"04/28/2024 10:28:44 PM\",\n      \"UserInteraction\": \"error: Out of wall\"\n    },\n    {\n      \"TimeStamp\": \"04/28/2024 10:28:44 PM\",\n      \"UserInteraction\": \"Stop\"\n    },\n    {\n      \"TimeStamp\": \"04/28/2024 10:28:46 PM\",\n      \"UserInteraction\": \"ButtonReplay\"\n    }\n  ],\n  \"token\": \"a74b47e2fd8541ea94a8c56123d7d6f7\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/logs",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"logs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get log",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InByaXlhbmthIiwiaWQiOiI2NjI2ZmNmMjBhZTRkYTFkODI1NTJjZTciLCJpYXQiOjE3MTM4MzEzNTh9.pVtO-PYBLXTlFVaPSerk6-wNlJbnygN5-DWGQBUihFI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/api/logs",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"logs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Errors log",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InByaXlhbmthIiwiaWQiOiI2NjI2ZmNmMjBhZTRkYTFkODI1NTJjZTciLCJpYXQiOjE3MTM4MzEzNTh9.pVtO-PYBLXTlFVaPSerk6-wNlJbnygN5-DWGQBUihFI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/api/logs/errors",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"logs",
+								"errors"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "DashboardAPIs",
+			"item": [
+				{
+					"name": "Common errors",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InByaXlhbmthIiwiaWQiOiI2NjI2ZmNmMjBhZTRkYTFkODI1NTJjZTciLCJpYXQiOjE3MTM4MzEzNTh9.pVtO-PYBLXTlFVaPSerk6-wNlJbnygN5-DWGQBUihFI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"days\":[30,7,1]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/logs/common-errors",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"logs",
+								"common-errors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Longest levels",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InByaXlhbmthIiwiaWQiOiI2NjI2ZmNmMjBhZTRkYTFkODI1NTJjZTciLCJpYXQiOjE3MTM4MzEzNTh9.pVtO-PYBLXTlFVaPSerk6-wNlJbnygN5-DWGQBUihFI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"days\":[30,7,1]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/logs/longest-levels",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"logs",
+								"longest-levels"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Popular levels",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InByaXlhbmthIiwiaWQiOiI2NjI2ZmNmMjBhZTRkYTFkODI1NTJjZTciLCJpYXQiOjE3MTM4MzEzNTh9.pVtO-PYBLXTlFVaPSerk6-wNlJbnygN5-DWGQBUihFI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"days\":[30,7,1]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/logs/popular-levels",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"logs",
+								"popular-levels"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Average gamesession",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InByaXlhbmthIiwiaWQiOiI2NjI2ZmNmMjBhZTRkYTFkODI1NTJjZTciLCJpYXQiOjE3MTM4MzEzNTh9.pVtO-PYBLXTlFVaPSerk6-wNlJbnygN5-DWGQBUihFI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"days\":[30,7,1]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/logs/average-gamesession",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"logs",
+								"average-gamesession"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "UsersAPIs",
+			"item": [
+				{
+					"name": "Post User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"developer\",\n    \"password\":\"pacific\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get user",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"developer\",\n    \"password\":\"waytogo\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
