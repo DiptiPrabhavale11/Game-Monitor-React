@@ -61,3 +61,61 @@ To set up this project on your local machine, please follow the detailed instruc
 - **Postman Scripts**: The Postman collection of all the developed APIs can be found [here](https://web.postman.co/workspace/6a97e401-1c18-4225-871b-6d3bcb40eca3/collection/25901970-6f4a9445-1a74-4481-b317-99a76af348a0). You can also set up your postman in your local by importing postman [JSON](PostmanScripts/EDCSDEV.LogsMonitor.json).
 - **Current State of the Project**: can be found [here](/Documentation/CurrentStateofProject.md).
 
+##  🖥️ UI SCreens
+
+- ### User Authentication ([Login.jsx](/frontend/src/components/Login.jsx))
+
+  ![image](https://github.com/edcsdev/api_backend/assets/113642858/f8027a0e-a4d2-4a7c-aa10-0b397ca7e08d)
+
+- ### Fetch game logs ([Logs.jsx](/frontend/src/components/Login.jsx), [api.js](/frontend/src/Services/api.js), [GameSession.js](/controller/GameSession.js))
+
+  ![image](https://github.com/edcsdev/api_backend/assets/113642858/cbbc17fa-2a3e-43e4-afe9-921b5ce61a5a)
+  
+- ### Search logs based on game session id ([Logs.jsx](/frontend/src/components/Login.jsx), [DisplayLogs.jsx](/frontend/src/components/DisplayLogs.jsx))
+
+  ![image](https://github.com/edcsdev/api_backend/assets/113642858/99657959-8084-4069-8d4a-e8b5ec001d49)
+  
+- ### View logs JSON ([DisplayLogs.jsx](/frontend/src/components/DisplayLogs.jsx), [LevelSession.jsx](/frontend/src/components/LevelSession.jsx))
+
+  ![image](https://github.com/edcsdev/api_backend/assets/113642858/08a3598e-9bc1-4bd0-8df3-ce9602661193)
+
+- ### Pagination ([Logs.jsx](/frontend/src/components/Login.jsx), [DisplayLogs.jsx](/frontend/src/components/DisplayLogs.jsx))
+
+  ![image](https://github.com/edcsdev/api_backend/assets/113642858/4513fe9d-ae1f-4251-a964-17352818ce5f)
+
+- ### Dashboard ([Dashboard.jsx](/frontend/src/components/Dashboard.jsx))
+
+  ![image](https://github.com/edcsdev/api_backend/assets/113642858/1be1cb41-0021-480f-9e2d-49608da78efc)
+
+- #### Valid Logs over specified period (# no of days) ([LogsBar.jsx](/frontend/src/components/charts/LogsBar.jsx), [DisplayLogs.jsx](/frontend/src/components/DisplayLogs.jsx))
+
+  ![image](https://github.com/edcsdev/api_backend/assets/113642858/1de5b1e3-31ad-424a-9b05-c14794325cb2)
+
+  ![image](https://github.com/edcsdev/api_backend/assets/113642858/44a528fe-9a69-4a17-a4e1-a0f43f227fed)
+
+- #### Invalid Logs over specified period (# no of days) ([LogsBar.jsx](/frontend/src/components/charts/LogsBar.jsx), [DisplayLogs.jsx](/frontend/src/components/DisplayLogs.jsx))
+
+  ![image](https://github.com/edcsdev/api_backend/assets/113642858/7d7f4143-89be-4355-aaed-ec06da27467c)
+
+  ![image](https://github.com/edcsdev/api_backend/assets/113642858/205342c1-0e95-4d3c-b222-5f2fc149127c)
+
+- #### Top 3 Popular Levels over specified period (# no of days) ([Bar.jsx](/frontend/src/components/charts/Bar.jsx), [DisplayLogs.jsx](/frontend/src/components/DisplayLogs.jsx))
+
+  ![image](https://github.com/edcsdev/api_backend/assets/113642858/e38694f7-e07e-457c-b7b7-23293cdf09e4)
+
+  ![image](https://github.com/edcsdev/api_backend/assets/113642858/ad7ab795-5420-4bed-b905-f392f0d6e364)
+
+- #### Top 3 Longest Levels over specified period (# no of days) ([Bar.jsx](/frontend/src/components/charts/Bar.jsx), [DisplayLogs.jsx](/frontend/src/components/DisplayLogs.jsx))
+
+  ![image](https://github.com/edcsdev/api_backend/assets/113642858/a8f5bbef-22a9-49d9-b8d7-71202cc09866)
+
+  ![image](https://github.com/edcsdev/api_backend/assets/113642858/91219cb9-9771-4315-b5f4-7b32f644dbd6)
+
+- #### Average time for game sessions over specified period (# no of days) ([Bar.jsx](/frontend/src/components/charts/Bar.jsx))
+
+  ![image](https://github.com/edcsdev/api_backend/assets/113642858/f1396dd7-cef0-4d7a-beb5-240faf4d60b1)
+
+- #### Most common Errors
+
+  ![image](https://github.com/edcsdev/api_backend/assets/113642858/fb1f15e4-6fbc-4fcc-b110-17a6c2867944)
+
